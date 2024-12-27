@@ -48,7 +48,8 @@ const TimelineList = () => {
       data={data}
       renderItem={renderItem}
       estimatedItemSize={40}
-    />
+      keyExtractor={(item, index) => index?.toString()}
+          />
     </View>
   );
 };

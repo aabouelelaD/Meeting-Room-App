@@ -10,10 +10,6 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    timeText: {
-        color: 'white',
-        fontSize: 20,
-    },
     circleStyle: {
         width: 25,
         height: 25,

@@ -10,11 +10,8 @@ useEffect(() => {
     getMeetings({startDate: '2024-12-27T09:00:00.000Z', endDate:'2024-12-27T18:00:00.000Z', roomId: '7'})
         .then(data => {
             setData(data);
-            setLoading(false);
         })
-        .catch(err => {
-            setLoading(false);
-        });
+        .catch(err => {}).finally(() => {setLoading(false)})
 }, []);
 
 
