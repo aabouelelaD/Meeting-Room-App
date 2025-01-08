@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { timelineItemInterface } from '../../types/timeline';
 import { styles } from './timelineItem.styles';
 import { Colors } from '../../theme/colors';
+import { Text } from '../../common/Text';
 
 interface Props {
     item: timelineItemInterface;
@@ -24,9 +25,9 @@ const TimeLineItem: React.FC<Props> = ({ item, isLastItem, index }) => {
     return (
         <View style={container}>
             <View style={rowContainer}>
-                {isEven && <Text style={getTimeTextStyle('left')}>{item?.time}</Text>}
-                <View style={[circleStyle, { backgroundColor: item?.isOccupied ? Colors.RED : Colors.GREEN }]} />
-                {!isEven && <Text style={getTimeTextStyle('right')}>{item?.time}</Text>}
+                {isEven && <Text variant="bold" style={getTimeTextStyle('left')}>{item?.time}</Text>}
+                <View style={[circleStyle, { backgroundColor: item?.isOccupied ? Colors.RED : Colors.PRIMARY }]} />
+                {!isEven && <Text variant="bold" style={getTimeTextStyle('right')}>{item?.time}</Text>}
             </View>
             {!isLastItem && <View style={lineStyle} />}
         </View>

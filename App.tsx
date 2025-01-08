@@ -1,93 +1,73 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, StyleSheet, View} from 'react-native';
+import moment from 'moment';
+import {TimelineList} from './src/feature/timelineList';
+import { MeetingRoomDetails } from './src/types/meetingRoom';
+import { Header } from './src/components/Header';
+import { MeetingInfo } from './src/components/MeetingInfo';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const meetingRoomDetails: MeetingRoomDetails = {
+  roomId: 'G.307',
+  roomName: 'Mohammed Ali',
+  roomLocation: 'G.307',
+  roomCapacity: 'G.307',
+  organizer: 'Ahmed Mohsen',
+  attendees: ['Omar Khairy', 'Adham Abouelela', 'Youmna Osama'],
+};
 
-import {TimelineList } from './src/feature/timelineList'
+function App(): React.JSX.Element {
+  const [time, setTime] = useState(moment().format('HH:mm'));
+  const dateString = moment().format('D MMMM YYYY');
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(moment().format('HH:mm'));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={styles.container}>
+      <Image
+        style={StyleSheet.absoluteFillObject}
+        resizeMode="contain"
+        source={{
+          uri: 'https://wpassets.brainstation.io/app/uploads/2017/12/13095816/Deloitte.jpg',
+        }}
+      />
+      <Header dateString={dateString} time={time} />
+      <View style={styles.content}>
+        <View style={styles.leftSection}>
+          <MeetingInfo meetingDetails={meetingRoomDetails} />
+        </View>
+        <View style={styles.middleSection} />
+        <View style={styles.rightSection}>
+          <TimelineList />
+        </View>
+      </View>
     </View>
   );
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-      <View style={{flex: 1}}>
-      <TimelineList />
-      </View>
-
-  );
-}
-
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    padding: 24,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  content: {
+    flex: 1,
+    flexDirection: 'row',
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  leftSection: {
+    flex: 1,
   },
-  highlight: {
-    fontWeight: '700',
+  middleSection: {
+    flex: 1.6,
+  },
+  rightSection: {
+    flex: 0.5,
   },
 });
 

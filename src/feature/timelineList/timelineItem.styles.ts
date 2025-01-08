@@ -2,8 +2,6 @@ import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
-        alignSelf: 'center',
-        justifyContent: 'center',
     },
     rowContainer: {
         flexDirection: 'row',
@@ -11,8 +9,8 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     circleStyle: {
-        width: 25,
-        height: 25,
+        width: 20,
+        height: 20,
         borderRadius: 12.5,
         position: 'absolute',
         alignSelf: 'center',
