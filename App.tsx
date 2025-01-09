@@ -1,11 +1,11 @@
 
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-import moment from 'moment';
 import {TimelineList} from './src/feature/timelineList';
 import { MeetingRoomDetails } from './src/types/meetingRoom';
 import { Header } from './src/components/Header';
 import { MeetingInfo } from './src/components/MeetingInfo';
+import { Colors } from './src/theme/colors';
 
 const meetingRoomDetails: MeetingRoomDetails = {
   roomId: 'G.307',
@@ -17,15 +17,7 @@ const meetingRoomDetails: MeetingRoomDetails = {
 };
 
 function App(): React.JSX.Element {
-  const [time, setTime] = useState(moment().format('HH:mm'));
-  const dateString = moment().format('D MMMM YYYY');
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(moment().format('HH:mm'));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <View style={styles.container}>
@@ -36,12 +28,11 @@ function App(): React.JSX.Element {
           uri: 'https://wpassets.brainstation.io/app/uploads/2017/12/13095816/Deloitte.jpg',
         }}
       />
-      <Header dateString={dateString} time={time} />
+      <Header />
       <View style={styles.content}>
         <View style={styles.leftSection}>
           <MeetingInfo meetingDetails={meetingRoomDetails} />
         </View>
-        <View style={styles.middleSection} />
         <View style={styles.rightSection}>
           <TimelineList />
         </View>
@@ -53,7 +44,7 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: Colors.BLACK,
     padding: 24,
   },
   content: {
@@ -61,13 +52,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   leftSection: {
-    flex: 1,
-  },
-  middleSection: {
-    flex: 1.6,
+    flex: 0.80,
   },
   rightSection: {
-    flex: 0.5,
+    flex: 0.20,
   },
 });
 

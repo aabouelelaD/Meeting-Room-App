@@ -43,7 +43,7 @@ const data = [
 
 const TimelineList = () => {
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, marginTop: 50}}>
     <FlashList
       data={data}
       renderItem={renderItem}
