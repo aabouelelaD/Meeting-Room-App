@@ -1,13 +1,18 @@
-import React from 'react';
-import { Text as BaseText, View } from 'react-native';
+import React, {PropsWithChildren} from 'react';
+import {Text as BaseText, TextProps, TextStyle} from 'react-native';
+import {styles} from './Text.styles';
+interface TextComponentProps extends TextProps {
+  style?: TextStyle | TextStyle[];
+  variant?: 'default' | 'medium' | 'semiBold' | 'bold';
+}
 
- const TextComponent = () => {
+const TextComponent: React.FC<PropsWithChildren<TextComponentProps>> = (
+  {style, children, variant = 'default',...props}) => {
   return (
-    <View>
-      <BaseText>Button</BaseText>
-    </View>
+    <BaseText {...props} style={[styles[variant], style]}>
+      {children}
+    </BaseText>
   );
 };
 
-
-export const Text = React.memo(TextComponent)
+export const Text = React.memo(TextComponent);
